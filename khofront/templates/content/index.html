@@ -1,0 +1,59 @@
+{% extends 'toplink.html'  %}
+{% load static %}
+{% block body %}
+
+    <body class="page home page-template-default">
+        <div id="page" class="hfeed site">
+            {% include "header.html" %}
+            <!-- .header-v7 -->
+            <!-- ============================================================= Header End ============================================================= -->
+            <div id="content" class="site-content" tabindex="-1">
+                <div class="col-full">
+                    <div class="row">
+                        <div id="primary" class="content-area">
+                            <main id="main" class="site-main">
+                                {% include "plugin/slide.html" %}
+                                {% include "plugin/products-tab.html" %}
+                                <!-- .section-products-tabs -->
+
+                                <!-- .banner -->
+
+                                <!-- .banners -->
+                                <div class="banner full-width-banner stretch-full-width help-banner">
+                                    <a href="contact-v1.html">
+                                        <div style="background-color:#eeeeee; height:495px;" class="banner-bg">
+                                            <div class="caption">
+                                                <div class="banner-info">
+                                                    <h4 class="pretitle">Sản phẩm</h4>
+                                                    <h3 class="title">KHO VAN HANH
+                                                        <br>RẤT HÂN HẠNH PHỤC VỤ</h3>
+                                                    <h4 class="subtitle">Whether it be to add to your collection, that first special wristwatch or the restoration of a much loved heirloom we are here to help</h4>
+                                                </div>
+                                                <!-- .banner-info -->
+                                            </div>
+                                            <!-- .caption -->
+                                        </div>
+                                        <!-- .banner-bg -->
+                                    </a>
+                                </div>
+                                <!-- .banner -->
+
+                                <!-- .brands-carousel -->
+                            </main>
+                            <!-- #main -->
+                        </div>
+                        <!-- #primary -->
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .col-full -->
+            </div>
+            <!-- #content -->
+
+            {% include 'footer.html' %}
+            <!-- .site-footer -->
+        </div>
+    </body>
+
+
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "toplink.html" %}
+{% load static %}
+{% block body %}
+
+    <body class="woocommerce-active single-product full-width normal">
+        <div id="page" class="hfeed site">
+            <!-- .top-bar-v1 -->
+            {% include "header.html" %}
+            <!-- .header-v1 -->
+            <!-- ============================================================= Header End ============================================================= -->
+            <div id="content" class="site-content" tabindex="-1">
+                <div class="col-full">
+                    <div class="row">
+                        <nav class="woocommerce-breadcrumb">
+                            <a href="home-v1.html">Trang chủ</a>
+                            <span class="delimiter">
+                                <i class="tm tm-breadcrumbs-arrow-right"></i>
+                            </span><a href="product-category.html">{{ product.type }}</a>
+                            <span class="delimiter">
+                                <i class="tm tm-breadcrumbs-arrow-right"></i>
+                            </span>{{ product.name }}
+                        </nav>
+                        <!-- .woocommerce-breadcrumb -->
+                        <div id="primary" class="content-area">
+                            <main id="main" class="site-main">
+                                <div class="product product-type-simple">
+                                    <div class="single-product-wrapper">
+                                        <div class="product-images-wrapper thumb-count-4">
+                                            <span class="onsale">-
+                                                <span class="woocommerce-Price-amount amount">
+                                                    <span class="woocommerce-Price-currencySymbol">$</span>242.99</span>
+                                            </span>
+                                            <!-- .onsale -->
+                                            <div id="techmarket-single-product-gallery" class="techmarket-single-product-gallery techmarket-single-product-gallery--with-images techmarket-single-product-gallery--columns-4 images" data-columns="4">
+                                                <div class="techmarket-single-product-gallery-images" data-ride="tm-slick-carousel" data-wrap=".woocommerce-product-gallery__wrapper" data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:false,&quot;asNavFor&quot;:&quot;#techmarket-single-product-gallery .techmarket-single-product-gallery-thumbnails__wrapper&quot;}">
+                                                    <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4">
+                                                        <figure class="woocommerce-product-gallery__wrapper ">
+                                                            <div data-thumb="assets/images/products/sm-card-1.jpg" class="woocommerce-product-gallery__image">
+                                                                <a href="assets/images/products/big-card.jpg" tabindex="0">
+                                                                    <img width="600" height="600" src="{{ product.image.url }}" class="attachment-shop_single size-shop_single wp-post-image" alt="">
+                                                                </a>
+                                                            </div>
+                                                            <div data-thumb="assets/images/products/sm-card-3.jpg" class="woocommerce-product-gallery__image">
+                                                                <a href="assets/images/products/big-card-2.jpg" tabindex="-1">
+                                                                    <img width="600" height="600" src="{{ product.image.url }}" class="attachment-shop_single size-shop_single" alt="">
+                                                                </a>
+                                                            </div>
+
+                                                        </figure>
+                                                    </div>
+                                                    <!-- .woocommerce-product-gallery -->
+                                                </div>
+                                                <!-- .techmarket-single-product-gallery-images -->
+                                                <div class="techmarket-single-product-gallery-thumbnails" data-ride="tm-slick-carousel" data-wrap=".techmarket-single-product-gallery-thumbnails__wrapper" data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;vertical&quot;:true,&quot;verticalSwiping&quot;:true,&quot;focusOnSelect&quot;:true,&quot;touchMove&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-up\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-down\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;asNavFor&quot;:&quot;#techmarket-single-product-gallery .woocommerce-product-gallery__wrapper&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:765,&quot;settings&quot;:{&quot;vertical&quot;:false,&quot;horizontal&quot;:true,&quot;verticalSwiping&quot;:false,&quot;slidesToShow&quot;:4}}]}">
+                                                    <figure class="techmarket-single-product-gallery-thumbnails__wrapper">
+                                                        <figure data-thumb="assets/images/products/sm-card-1.jpg" class="techmarket-wc-product-gallery__image">
+                                                            <img width="180" height="180" src="{{ product.image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">
+                                                        </figure>
+                                                        <figure data-thumb="assets/images/products/sm-card-3.jpg" class="techmarket-wc-product-gallery__image">
+                                                            <img width="180" height="180" src="{{ product.image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail" alt="">
+                                                        </figure>
+
+                                                    </figure>
+                                                    <!-- .techmarket-single-product-gallery-thumbnails__wrapper -->
+                                                </div>
+                                                <!-- .techmarket-single-product-gallery-thumbnails -->
+                                            </div>
+                                            <!-- .techmarket-single-product-gallery -->
+                                        </div>
+                                        <!-- .product-images-wrapper -->
+                                        <div class="summary entry-summary">
+                                            <div class="single-product-header">
+                                                <h1 class="product_title entry-title">{{ product.name }}</h1>
+                                            </div>
+                                            <!-- .rating-and-sharing-wrapper -->
+                                            <div class="woocommerce-product-details__short-description">
+                                                <ul>
+                                                    {{ product.description|safe }}
+                                                </ul>
+                                            </div>
+                                            <!-- .woocommerce-product-details__short-description -->
+                                            <div class="product-actions-wrapper">
+                                                <div class="product-actions">
+                                                    <p class="price">
+                                                        <del>
+                                                            <span class="woocommerce-Price-amount amount">
+                                                                <span class="woocommerce-Price-currencySymbol"></span>{{ product.sale }}</span>
+                                                        </del>
+                                                        <ins>
+                                                            <span class="woocommerce-Price-amount amount">
+                                                                <span class="woocommerce-Price-currencySymbol"></span>
+                                                                {{ product.price_string }} <sup>đ</sup></span>
+                                                        </ins>
+                                                    </p>
+                                                    <!-- .single-product-header -->
+                                                    <form enctype="multipart/form-data" method="post" class="cart">
+                                                        <div class="quantity">
+                                                            <label for="quantity-input">Số lượng</label>
+                                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" id="quantity-input">
+                                                        </div>
+                                                        <!-- .quantity -->
+                                                        <button class="single_add_to_cart_button button alt" value="185" name="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+                                                    </form>
+                                                    <!-- .cart -->
+                                                </div>
+                                                <!-- .product-actions -->
+                                            </div>
+                                            <!-- .product-actions-wrapper -->
+                                        </div>
+                                        <!-- .entry-summary -->
+                                    </div>
+                                    <!-- .single-product-wrapper -->
+                                    {% include "plugin/related.html" %}
+                                    <!-- .tm-related-products-carousel -->
+                                    <!-- .section-landscape-products-carousel -->
+                                    <!-- .brands-carousel -->
+                                </div>
+                                <!-- .product -->
+                            </main>
+                            <!-- #main -->
+                        </div>
+                        <!-- #primary -->
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .col-full -->
+            </div>
+            <!-- #content -->
+            {% include "footer.html" %}
+            <!-- .site-footer -->
+        </div>
+
+
+    </body>
+
+{% endblock %}

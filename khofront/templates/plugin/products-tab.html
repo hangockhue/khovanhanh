@@ -1,0 +1,88 @@
+<section class="section-products-tabs">
+                                    <div class="section-products-tabs-wrap">
+                                        <header class="section-header">
+                                            <h2 class="section-title">Sản phẩm nổi bật</h2>
+                                            <ul role="tablist" class="nav justify-content-center">
+                                                {% for type in type_product|get_first %}
+                                                        <li class="nav-item"><a class="nav-link active" href="#tab-{{type.pk}}" data-toggle="tab">{{ type.name }}</a></li>
+                                                {% endfor %}
+                                                {% for type in type_product|get_rest %}
+                                                        <li class="nav-item"><a class="nav-link " href="#tab-{{ type.pk }}" data-toggle="tab">{{ type.name }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </header>
+                                        <div class="tab-content">
+
+                                            {% for type in type_product|get_first %}
+                                                <div id="tab-{{type.pk}}" class="tab-pane active" role="tabpanel">
+                                                <div class="products-carousel">
+                                                    <div class="container-fluid">
+                                                        <div class="woocommerce columns-4">
+                                                            <div class="products">
+                                                                {% for i in products|get_item:type.name %}
+                                                                <div class="product">
+                                                                    <a href="/detail/{{ i.url }}-{{ i.pk }}.html" class="woocommerce-LoopProduct-link">
+                                                                        <img src="{{i.image.url}}" width="224" height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> {{ i.price_string }}  <sup>đ</sup> </span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">{{ i.name }}</h2>
+                                                                    </a>
+
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Chi tiết</a>
+                                                                    </div>
+                                                                </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            {% for type in type_product|get_rest %}
+                                                    <div id="tab-{{type.pk}}" class="tab-pane " role="tabpanel">
+                                                <div class="products-carousel">
+                                                    <div class="container-fluid">
+                                                        <div class="woocommerce columns-4">
+                                                            <div class="products">
+                                                                {% for i in products|get_item:type.name %}
+                                                                <div class="product">
+                                                                    <a href="/detail/abc-{{ i.pk }}.html" class="woocommerce-LoopProduct-link">
+                                                                        <img src="{{ i.image.url }}" width="224" height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount">{{i.price_string}} <sup>đ</sup></span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">{{ i.name }}</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Add to cart</a>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.product-outer -->
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .container-fluid -->
+                                                </div>
+                                                <!-- .products-carousel -->
+                                            </div>
+                                            <!-- .tab-pane -->
+                                            {% endfor %}
+                                            <!-- .tab-pane -->
+                                        </div>
+                                        <!-- .tab-content -->
+                                        <a  class="button">
+                                            </a>
+                                    </div>
+                                    <!-- .section-products-tabs-wrap -->
+                                </section>

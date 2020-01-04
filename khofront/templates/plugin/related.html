@@ -1,0 +1,33 @@
+<div class="tm-related-products-carousel section-products-carousel" id="tm-related-products-carousel"
+     data-ride="tm-slick-carousel" data-wrap=".products"
+     data-slick="{&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-left\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-right\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;appendArrows&quot;:&quot;#tm-related-products-carousel .custom-slick-nav&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:767,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
+    <section class="related">
+        <header class="section-header">
+            <h2 class="section-title">Một số sản phẩm khác</h2>
+            <nav class="custom-slick-nav"></nav>
+        </header>
+        <!-- .section-header -->
+        <div class="products">
+            {% for product in random_related %}
+            <div class="product">
+                <a href="/detail/{{ product.url }}-{{ product.pk }}.html" class="woocommerce-LoopProduct-link">
+                    <img src="{{ product.image.url }}" width="224" height="197" class="wp-post-image" alt="">
+                    <span class="price">
+                                                            <ins>
+                                                                <span class="amount"></span>
+                                                            </ins>
+                                                            <span class="amount"> {{ product.price_string }} <sup>đ</sup></span>
+                                                        </span>
+                    <!-- /.price -->
+                    <h2 class="woocommerce-loop-product__title">{{ product.name }}</h2>
+                </a>
+                <div class="hover-area">
+                    <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Thêm vào giỏ hàng</a>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- /.product-outer -->
+        </div>
+    </section>
+    <!-- .single-product-wrapper -->
+</div>

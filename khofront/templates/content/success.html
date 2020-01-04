@@ -1,0 +1,34 @@
+{% extends 'toplink.html'  %}
+{% load static %}
+{% block body %}
+
+    <body class="page home page-template-default">
+        <div id="page" class="hfeed site">
+            {% include "header.html" %}
+            <!-- .header-v7 -->
+            <!-- ============================================================= Header End ============================================================= -->
+            <div id="content" class="site-content" tabindex="-1">
+                <div class="col-full">
+                    <div class="row">
+                        <div id="primary" class="content-area">
+                            <main id="main" class="site-main">
+                                {% include "plugin/success.html" %}
+
+                            </main>
+                            <!-- #main -->
+                        </div>
+                        <!-- #primary -->
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .col-full -->
+            </div>
+            <!-- #content -->
+
+            {% include 'footer.html' %}
+            <!-- .site-footer -->
+        </div>
+    </body>
+
+
+{% endblock %}
