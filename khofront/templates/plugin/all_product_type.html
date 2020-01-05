@@ -1,0 +1,40 @@
+<section class="section-products-tabs">
+                                    <div class="section-products-tabs-wrap">
+                                        <div class="tab-content">
+                                             <div id="" class="tab-pane active" role="tabpanel">
+                                                <div class="products-carousel">
+                                                    <div class="container-fluid">
+                                                        <div class="woocommerce columns-4">
+                                                            <div class="products">
+                                                                {% for i in products %}
+                                                                <div class="product">
+                                                                    <a href="/detail/{{ i.url }}-{{ i.pk }}.html" class="woocommerce-LoopProduct-link">
+                                                                        <img src="{{i.image.url}}" width="224" height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> {{ i.price_string }}  <sup>đ</sup> </span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">{{ i.name }}</h2>
+                                                                    </a>
+
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Chi tiết</a>
+                                                                    </div>
+                                                                </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- .tab-pane -->
+                                        </div>
+                                        <!-- .tab-content -->
+                                        <a  class="button">
+                                            </a>
+                                    </div>
+                                    <!-- .section-products-tabs-wrap -->
+                                </section>

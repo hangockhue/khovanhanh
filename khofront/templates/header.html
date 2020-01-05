@@ -14,24 +14,20 @@
                             <!-- .primary-navigation -->
                             <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation" data-nav="flex-menu">
                                 <ul id="menu-primary-menu" class="nav yamm">
-                                    {% for title in group_type %}
+                                    {% for title, small_titles in titles.items %}
                                     <li class="menu-item menu-item-has-children animate-dropdown dropdown">
-                                        <a title="Women" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">{{ title.name }}<span class="caret"></span></a>
+                                        <a title="Women" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">{{ title }}<span class="caret"></span></a>
                                         <ul role="menu" class=" dropdown-menu">
-                                            {% for type in type_product_all %}
-                                                {% if type.group_type == title.name %}
+                                            {% for s in small_titles %}
                                                 <li class="menu-item animate-dropdown">
-                                                    <a title="Eyeglasses" href="product-category.html">Eyeglasses</a>
+                                                    <a title="{{s}}" href="/{{ s.name }}-{{ s.pk }}">{{ s.name }}</a>
                                                 </li>
-                                                {% endif %}
                                             {% endfor %}
                                         </ul>
                                         <!-- .dropdown-menu -->
                                     </li>
                                     {% endfor %}
-                                    <li class="menu-item animate-dropdown">
-                                        <a title="Personalize" href="shop.html">Title 3</a>
-                                    </li>
+
                                     <li class="techmarket-flex-more-menu-item dropdown">
                                         <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
                                         <ul class="overflow-items dropdown-menu"></ul>

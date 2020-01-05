@@ -6,7 +6,10 @@ class Grouptype(models.Model):
     name = models.CharField("Loại chung", max_length=50)
     highlight = models.BooleanField("Hiển thị title", default=True)
     def __str__(self):
-        return self.name
+        return remove_accents(self.name)
+    @property
+    def name_filter(self):
+        return remove_accents(self.name)
     class Meta:
         verbose_name = 'Grouptype'
         verbose_name_plural = 'Nhóm sản phẩm'
