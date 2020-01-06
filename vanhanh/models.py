@@ -21,6 +21,9 @@ class Typeproduct(models.Model):
 
     def __str__(self):
         return self.name
+    @property
+    def url(self):
+        return remove_accents(self.name).replace(" ","-")
     class Meta:
         verbose_name = 'Typeproduct'
         verbose_name_plural = 'Loại sản phẩm'
