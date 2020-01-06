@@ -37,8 +37,7 @@ def success_post(request):
 
 def search(request):
     if request.method == "GET":
-        key_search = remove_accents(request.GET['search'])
-        print(key_search)
+        key_search = remove_accents(request.GET['search']).lower()
         products = [product for product in Product.objects.all() if key_search in product.name_remove_accents.lower()]
         print(products)
         return render(request, "content/search.html", { "products": products, "key_search": request.GET["search"] })
