@@ -9,3 +9,4 @@ github
 .idea/*
 venv
 .ebextensions/*
+.idea/workspace.xml
