@@ -1,4 +1,11 @@
-
-.idea/workspace.xml
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
 *.pyc
-*.pyc
+settings.py
+xanhluc/ssl/*
+*.pub
+github
+.idea/*
+venv
+.ebextensions/*
