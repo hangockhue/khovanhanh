@@ -4883,7 +4883,7 @@ body.can-uppercase .section-categories-carousel.section-top-categories .readmore
       margin: 0 15px; } }
   @media (min-width: 1200px) {
     .site-header.header-v7 .primary-navigation {
-      flex: 0 0 41.6666666667%;
+      flex: 0 0 25%;
       max-width: 41.6666666667%; } }
   .site-header.header-v7 .row {
     align-items: center; }

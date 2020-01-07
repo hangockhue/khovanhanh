@@ -3,9 +3,9 @@
 
 <header id="masthead" class="site-header header-v7" style="background-image: none; padding: 1px; " >
                 <div class="desktop-only">
-                    <div class="techmarket-sticky-wrap">
+                    <div class="techmarket-sticky-wrap" style="padding:0px;">
                         <div class="row" style="padding:5px;">
-                             <div class="site-branding" style="flex-grow:0">
+                             <div class="site-branding" style="flex-grow:0;padding-left:5%">
                                 <a href="/" class="custom-logo-link" rel="home">
                                     <img style="height:60px;" src="{% static "assets/images/logo.png" %}" />
                                 </a>
@@ -36,8 +36,16 @@
                                 </ul>
                                 <!-- .nav -->
                             </nav>
-
-                            <!-- /.site-branding -->
+                            <div class="site-search">
+                                    <div class="widget woocommerce widget_product_search">
+                                        <form role="search" method="GET" class="woocommerce-product-search" action="/search">
+                                            <label class="screen-reader-text" for="woocommerce-product-search-field-0">Search for:</label>
+                                            <input type="search" id="woocommerce-product-search-field-1" class="search-field" placeholder="Tìm kiếm sản phẩm&hellip;" value="" name="search" />
+                                            <input type="submit" value="Search" />
+                                        </form>
+                                    </div>
+                                    <!-- .widget -->
+                                </div>
                             <!-- ============================================================= End Header Logo ============================================================= -->
 
                             <!-- .header-compare -->

@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ad076ae-f027-4f39-b6e0-377e46085430" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../xabay-fontend/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../xabay-fontend/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../xabay-fontend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../xabay-fontend/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../xabay-fontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../xabay-fontend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../xabay-fontend/xanhluc/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../xabay-fontend/xanhluc/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/khofront/static/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/khofront/static/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/khofront/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/khofront/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/css/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,13 +21,13 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../xabay-fontend" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1VI6BRWZNlq17WTxMA6CzsSotrx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../xabay-fontend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
