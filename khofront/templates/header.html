@@ -38,7 +38,7 @@
                             </nav>
                             <div class="site-search">
                                     <div class="widget woocommerce widget_product_search">
-                                        <form role="search" method="GET" class="woocommerce-product-search" action="/search">
+                                        <form role="search" method="GET" class="woocommerce-product-search" style="width:300px;" action="/search">
                                             <label class="screen-reader-text" for="woocommerce-product-search-field-0">Search for:</label>
                                             <input type="search" id="woocommerce-product-search-field-1" class="search-field" placeholder="Tìm kiếm sản phẩm&hellip;" value="" name="search" />
                                             <input type="submit" value="Search" />
@@ -55,15 +55,15 @@
                                 <li class="animate-dropdown dropdown ">
                                     <a class="cart-contents" href="cart.html" data-toggle="dropdown" title="View your shopping cart">
                                         <i class="tm tm-shopping-bag"></i>
-                                        <span class="count">2</span>
+                                        <span id="length_cart" class="count">0</span>
                                         <span class="amount">
-                                            <span class="price-label">Giỏ hàng</span>&#036;136.99</span>
+                                            <span class="price-label" id="total_price">Giỏ hàng</span>&#036;136.99</span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-mini-cart">
                                         <li>
                                             <div class="widget woocommerce widget_shopping_cart">
                                                 <div class="widget_shopping_cart_content">
-                                                    <ul class="woocommerce-mini-cart cart_list product_list_widget ">
+                                                    <ul class="woocommerce-mini-cart cart_list product_list_widget " id="cart">
                                                         <li class="woocommerce-mini-cart-item mini_cart_item">
                                                             <a href="#" class="remove" aria-label="Remove this item" data-product_id="65" data-product_sku="">×</a>
                                                             <a href="single-product-sidebar.html">
@@ -92,8 +92,8 @@
                                                             <span class="woocommerce-Price-currencySymbol">$</span>136.99</span>
                                                     </p>
                                                     <p class="woocommerce-mini-cart__buttons buttons">
-                                                        <a href="cart.html" class="button wc-forward">View cart</a>
-                                                        <a href="checkout.html" class="button checkout wc-forward">Checkout</a>
+                                                        <a href="cart.html" class="button wc-forward">Xem giỏ hàng</a>
+                                                        <a href="checkout.html" class="button checkout wc-forward">Đặt hàng</a>
                                                     </p>
                                                 </div>
                                                 <!-- .widget_shopping_cart_content -->
@@ -201,3 +201,42 @@
                 </div>
                 <!-- .handheld-only -->
             </header>
+            <script>
+                function checkCart() {
+                    if (getCookie("cart") === "" ) {
+                        document.getElementById("length_cart").innerHTML = 0;
+                    } else {
+                        const cart = JSON.parse(getCookie("cart"));
+                        document.getElementById("length_cart").innerHTML = cart.length;
+                        var html_product = ""
+                        for (var key in cart) {
+                                html_product += "<li class='woocommerce-mini-cart-item mini_cart_item'>"
+                                html_product += "<a href='#' class='remove' onclick = "" aria-label='Remove this item' data-product_id='65' data-product_sku=''>×</a>"
+                                html_product += "<a href='single-product-sidebar.html'>"
+                                html_product += "<img id='' src='"+ cart[key].image +"' class='attachment-shop_thumbnail size-shop_thumbnail wp-post-image' alt=''>" + cart[key].name
+                                html_product += "</a>"
+                                html_product += "<span class='quantity'>" + cart[key].amount.toString() + " ×"
+                                html_product += "<span class='woocommerce-Price-amount amount'>"
+                                html_product += "<span class='woocommerce-Price-currencySymbol'></span>" + cart[key].price + "</span>"
+                                html_product += "</span></li>"
+                        }
+                        document.getElementById("cart").innerHTML = html_product
+                    }
+                 };
+                function getCookie(cname) {
+                    var name = cname + "=";
+                    var ca = document.cookie.split(';');
+                    for(var i = 0; i <ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0)==' ') {
+                            c = c.substring(1);
+                        }
+                        if (c.indexOf(name) == 0) {
+                            return c.substring(name.length,c.length);
+                        }
+                    }
+                    return "";
+                }
+
+                 checkCart();
+            </script>

@@ -54,7 +54,7 @@
                                                 <div class="techmarket-single-product-gallery-thumbnails" data-ride="tm-slick-carousel" data-wrap=".techmarket-single-product-gallery-thumbnails__wrapper" data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;vertical&quot;:true,&quot;verticalSwiping&quot;:true,&quot;focusOnSelect&quot;:true,&quot;touchMove&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-up\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-down\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;asNavFor&quot;:&quot;#techmarket-single-product-gallery .woocommerce-product-gallery__wrapper&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:765,&quot;settings&quot;:{&quot;vertical&quot;:false,&quot;horizontal&quot;:true,&quot;verticalSwiping&quot;:false,&quot;slidesToShow&quot;:4}}]}">
                                                     <figure class="techmarket-single-product-gallery-thumbnails__wrapper">
                                                         <figure data-thumb="assets/images/products/sm-card-1.jpg" class="techmarket-wc-product-gallery__image">
-                                                            <img width="180" height="180" src="{{ product.image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">
+                                                            <img id="img_avatar" width="180" height="180" src="{{ product.image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">
                                                         </figure>
                                                         <figure data-thumb="assets/images/products/sm-card-3.jpg" class="techmarket-wc-product-gallery__image">
                                                             <img width="180" height="180" src="{{ product.image.url }}" class="attachment-shop_thumbnail size-shop_thumbnail" alt="">
@@ -70,7 +70,7 @@
                                         <!-- .product-images-wrapper -->
                                         <div class="summary entry-summary">
                                             <div class="single-product-header">
-                                                <h1 class="product_title entry-title">{{ product.name }}</h1>
+                                                <h1 id="product_name" class="product_title entry-title">{{ product.name }}</h1>
                                             </div>
                                             <!-- .rating-and-sharing-wrapper -->
                                             <div class="woocommerce-product-details__short-description">
@@ -93,14 +93,16 @@
                                                         </ins>
                                                     </p>
                                                     <!-- .single-product-header -->
-                                                    <form enctype="multipart/form-data" method="post" class="cart">
+                                                    <form  class="cart">
                                                         <div class="quantity">
-                                                            <label for="quantity-input">Số lượng</label>
-                                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" id="quantity-input">
+                                                            <label>Số lượng</label>
+                                                            <input type="number" min="1" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" id="quantity-input">
                                                         </div>
+
                                                         <!-- .quantity -->
-                                                        <button class="single_add_to_cart_button button alt" value="185" name="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+                                                        <button type="button" class="single_add_to_cart_button button alt" onclick="addToCart()" value="185" name="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
                                                     </form>
+
                                                     <!-- .cart -->
                                                 </div>
                                                 <!-- .product-actions -->
@@ -130,6 +132,67 @@
             <!-- .site-footer -->
         </div>
 
+    <script>
+    function getData() {
+        var image = "{{ product.image.url }}";
+        var price = "{{ product.price_string }}";
+        var name = "{{ product.name }}";
+        var amount = Number($("#quantity-input").attr('value'));
+        const data = {"image": image, "price": price, "name":name, "amount": amount};
+        return data;
+
+    }
+    function addToCart() {
+        const data = getData();
+        if (getCookie("cart") === "" ) {
+            console.log("Không có cart");
+            const cart = [];
+            cart.push(data);
+            console.log(cart.length);
+            document.cookie = "cart" + "=" + JSON.stringify(cart);
+        } else {
+            count = 0;
+            console.log("Tồn tại cart");
+            const cart = JSON.parse(getCookie("cart"));
+            for ( var key in cart) {
+                if (data.name == cart[key].name) {
+                    cart[key].amount = cart[key].amount + data.amount;
+                    count = count + 1;
+                }
+            }
+            if (count == 0) {
+                cart.push(data);
+            }
+            document.cookie = "cart" + "=" + JSON.stringify(cart);
+            document.getElementById("length_cart").innerHTML = cart.length;
+            console.log(cart);
+        }
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
+
+    function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length,c.length);
+        }
+    }
+    return "";
+}
+
+
+    </script>
 
     </body>
 
