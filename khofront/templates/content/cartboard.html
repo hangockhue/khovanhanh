@@ -1,0 +1,207 @@
+{% extends 'toplink.html'  %}
+{% load static %}
+{% block body %}
+
+    <body class="page home page-template-default">
+        <div id="page" class="hfeed site">
+            {% include "header.html" %}
+            <!-- .header-v7 -->
+            <!-- ============================================================= Header End ============================================================= -->
+            <div id="content" class="site-content" tabindex="-1">
+                <div class="col-full">
+                    <div class="row">
+                        <nav class="woocommerce-breadcrumb">
+                            <a href="/">Trang chủ</a>
+                            <span class="delimiter">
+                                <i class="tm tm-breadcrumbs-arrow-right"></i>
+                            </span>
+                            Giỏ hàng
+                        </nav>
+                        <div id="primary" class="content-area">
+                            <main id="main" class="site-main">
+                                <div class="type-page hentry">
+                                    <div class="entry-content">
+                                        <div class="woocommerce">
+                                            <div class="cart-wrapper">
+                                                <form method="post" action="#" class="woocommerce-cart-form">
+                                                    <table class="shop_table shop_table_responsive cart">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="product-remove">&nbsp;</th>
+                                                                <th class="product-thumbnail">&nbsp;</th>
+                                                                <th class="product-name">Sản phẩm</th>
+                                                                <th class="product-price">Giá</th>
+                                                                <th class="product-quantity">Số lượng</th>
+                                                                <th class="product-subtotal">Tổng</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="board-cart">
+
+
+                                                        </tbody>
+                                                        <tr>
+                                                                <td class="actions" colspan="6">
+<!--                                                                    <div class="coupon">-->
+<!--                                                                        <label for="coupon_code">Coupon:</label>-->
+<!--                                                                        <input type="text" placeholder="Coupon code" value="" id="coupon_code" class="input-text" name="coupon_code">-->
+<!--                                                                        <input type="submit" value="Apply coupon" name="apply_coupon" class="button">-->
+<!--                                                                    </div>-->
+                                                                    <input type="button" value="Cập nhật giỏ hàng" onclick="updateCartBoard()" name="update_cart" class="button">
+                                                                </td>
+                                                            </tr>
+                                                    </table>
+                                                    <!-- .shop_table shop_table_responsive -->
+                                                </form>
+                                                <!-- .woocommerce-cart-form -->
+                                                <div class="cart-collaterals">
+                                                    <div class="cart_totals">
+                                                        <h2>Đơn hàng</h2>
+                                                        <table class="shop_table shop_table_responsive">
+                                                            <tbody>
+                                                                <tr class="cart-subtotal">
+                                                                    <th>Tổng sản phẩm</th>
+                                                                    <td data-title="Subtotal">
+                                                                        <span class="woocommerce-Price-amount amount">
+                                                                            <span class="woocommerce-Price-currencySymbol" id="total_price_board">0</span>
+                                                                            <sup>đ</sup>
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="shipping">
+                                                                    <th>Phí ship</th>
+                                                                    <td data-title="Shipping">Giảm giá</td>
+                                                                </tr>
+                                                                <tr class="order-total">
+                                                                    <th>Thành tiền</th>
+                                                                    <td data-title="Total">
+                                                                        <strong>
+                                                                            <span id="last_total" class="woocommerce-Price-amount amount">0</span>
+                                                                            <sup>đ</sup>
+                                                                        </strong>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <!-- .shop_table shop_table_responsive -->
+                                                        <div class="wc-proceed-to-checkout">
+                                                            <form class="woocommerce-shipping-calculator" method="post" action="#">
+                                                                <p>
+                                                                    <a class="shipping-calculator-button">Thông tin khách hàng</a>
+                                                                </p>
+                                                                <div>
+                                                                    <div class="shipping-calculator-form">
+                                                                        <p id="name_" class="form-row form-row-wide validate-required">
+                                                                            <input type="text" name="name" placeholder="Tên khách hàng" value="" class="input-text">
+                                                                        </p>
+                                                                        <p id="number_" class="form-row form-row-wide validate-required">
+                                                                            <input type="text" name="phone_number" placeholder="Số điện thoại" value="" class="input-text">
+                                                                        </p>
+                                                                        <p id="address_" class="form-row form-row-wide validate-required">
+                                                                            <input type="text" name="address" placeholder="Địa chỉ" value="" class="input-text">
+                                                                        </p>
+                                                                        <p>
+                                                                            <button class="button" value="1" name="calc_shipping" type="submit">Đặt hàng</button>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <!-- .wc-proceed-to-checkout -->
+
+                                                        </div>
+                                                        <!-- .wc-proceed-to-checkout -->
+                                                    </div>
+                                                    <!-- .cart_totals -->
+                                                </div>
+                                                <!-- .cart-collaterals -->
+                                            </div>
+                                            <!-- .cart-wrapper -->
+                                        </div>
+                                        <!-- .woocommerce -->
+                                    </div>
+                                    <!-- .entry-content -->
+                                </div>
+                                <!-- .hentry -->
+                            </main>
+                            <!-- #main -->
+                        </div>
+                        <!-- #primary -->
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .col-full -->
+            </div>
+            <!-- #content -->
+            {% include 'footer.html' %}
+            <!-- .site-footer -->
+        </div>
+    </body>
+    <script>
+        function checkCartBoard() {
+            var total = 0;
+            if (localStorage.getItem("cart") === null ) {
+                        console.log("no thing")
+            } else {
+                 const cart = JSON.parse(localStorage.getItem("cart"));
+                 var html_product = ""
+                 for (var key in cart) {
+                     html_product += '<tr><td class="product-remove"><a class="remove" href="#">×</a></td>'
+                     html_product += '<td class="product-thumbnail"><a href="single-product-fullwidth.html">'
+                     html_product += '<img alt="" class="wp-post-image" src="single-product-fullwidth.html" width="180" height="180"></a></td>'
+                     html_product += '<td data-title="Product" class="product-name"><div class="media cart-item-product-detail">'
+                     html_product += '<a href="single-product-fullwidth.html"><img alt="" class="wp-post-image" src="' + cart[key].image + '" width="180" height="180"></a>'
+                     html_product += '<div class="media-body align-self-center"><a href="single-product-fullwidth.html">' + cart[key].name + '</a>'
+                     html_product += '</div></div></td><td data-title="Price" class="product-price"><span class="woocommerce-Price-amount amount">'
+                     html_product += cart[key].price +'</span><span class="woocommerce-Price-currencySymbol"><sup>đ</sup></span></td><td class="product-quantity" data-title="Quantity">'
+                     html_product += '<div class="quantity"><label for="quantity-input-1">Quantity</label>'
+                     html_product += '<input type="number" id="' + key.toString() + '" value="'+ cart[key].amount.toString() +'" title="Qty" class="input-text qty text" size="4">'
+                     html_product += '</div></td><td data-title="Total" class="product-subtotal"><span class="woocommerce-Price-amount amount">'
+                     html_product += (cart[key].price_number*cart[key].amount).toString() + '</span><sup>đ</sup><a title="Remove this item" class="remove" href="#">×</a>'
+                     html_product += '</td></tr>'
+                     total = total + Number(cart[key].price_number)*Number(cart[key].amount);
+
+                  }
+             }
+               document.getElementById("board-cart").innerHTML = html_product;
+               document.getElementById("total_price_board").innerHTML = total;
+               document.getElementById("last_total").innerHTML = total;
+        };
+        function updateCartBoard() {
+            console.log("Tiến hành cập nhật giỏ hàng");
+            if (localStorage.getItem("cart") !== null ) {
+                const cart = JSON.parse(localStorage.getItem("cart"));
+                for (var key in cart) {
+                    cart[key].amount = $("#"+key.toString()).val();
+
+                }
+
+            localStorage.setItem("cart",JSON.stringify(cart));
+            checkCartBoard();
+            checkCart();
+            notificationUpdate();
+            }
+        }
+        function notificationUpdate() {
+                    toastr.options = {
+                      "closeButton": false,
+                      "debug": false,
+                      "newestOnTop": false,
+                      "progressBar": true,
+                      "positionClass": "toast-top-right",
+                      "preventDuplicates": true,
+                      "showDuration": "300",
+                      "hideDuration": "1000",
+                      "timeOut": "2000",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                    }
+                   toastr.info('Giỏ hàng đã được cập nhật');
+                }
+
+        checkCartBoard();
+
+    </script>
+
+{% endblock %}

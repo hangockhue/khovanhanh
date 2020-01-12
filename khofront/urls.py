@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import views
 urlpatterns = [
     path('', views.index, name='index'),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('success', views.success_post, name='success'),
     path('register_email', views.register_email, name='email_register'),
     path("<page>-<pk>", views.type_product, name="type_product"),
-    path("/search", views.search, name="search")
+    path("/search", views.search, name="search"),
+    path("cartboard", views.cartboard, name="cartboard"),
 ]

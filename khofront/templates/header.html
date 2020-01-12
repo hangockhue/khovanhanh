@@ -77,7 +77,7 @@
                                                         </span>
                                                     </p>
                                                     <p class="woocommerce-mini-cart__buttons buttons">
-                                                        <a href="cart.html" class="button wc-forward">Tiến hành đặt hàng</a>
+                                                        <a href="cartboard" class="button wc-forward">Tiến hành đặt hàng</a>
                                                     </p>
                                                 </div>
                                                 <!-- .widget_shopping_cart_content -->
@@ -208,9 +208,9 @@
                                 html_product += "</span></li>"
                                 total = total + Number(cart[key].price_number)*Number(cart[key].amount);
                         }
-                        document.getElementById("cart").innerHTML = html_product
-                        document.getElementById("total_price").innerHTML = total
-                        document.getElementById("total_price_bar").innerHTML = total
+                        document.getElementById("cart").innerHTML = html_product;
+                        document.getElementById("total_price").innerHTML = total;
+                        document.getElementById("total_price_bar").innerHTML = total;
                     }
 
                  };

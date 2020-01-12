@@ -19,6 +19,7 @@ def index(request):
         titles[_title.name] = Typeproduct.objects.filter(group_type=_title)
     return render(request, "content/index.html", {"type_product": type_product, "products": products, "titles":titles})
 
+
 def type_product(request, pk, page):
     type = Typeproduct.objects.get(pk=pk)
     products = Product.objects.filter(type=type)
@@ -29,6 +30,10 @@ def type_product(request, pk, page):
         titles[_title.name] = Typeproduct.objects.filter(group_type=_title)
     print([products])
     return render(request, "content/type_product.html",{"products":products,"type":type ,"titles":titles})
+
+def cartboard(request):
+
+    return render(request, "content/cartboard.html")
 
 
 def success_post(request):
