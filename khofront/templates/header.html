@@ -57,43 +57,27 @@
                                         <i class="tm tm-shopping-bag"></i>
                                         <span id="length_cart" class="count">0</span>
                                         <span class="amount">
-                                            <span class="price-label" id="total_price">Giỏ hàng</span>&#036;136.99</span>
+                                            <span class="price-label">Giỏ hàng</span>
+                                            <span id="total_price"></span><sup>đ</sup>
+                                        </span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-mini-cart">
                                         <li>
                                             <div class="widget woocommerce widget_shopping_cart">
                                                 <div class="widget_shopping_cart_content">
                                                     <ul class="woocommerce-mini-cart cart_list product_list_widget " id="cart">
-                                                        <li class="woocommerce-mini-cart-item mini_cart_item">
-                                                            <a href="#" class="remove" aria-label="Remove this item" data-product_id="65" data-product_sku="">×</a>
-                                                            <a href="single-product-sidebar.html">
-                                                                <img src="assets/images/products/mini-cart1.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">XONE Wireless Controller&nbsp;
-                                                            </a>
-                                                            <span class="quantity">1 ×
-                                                                <span class="woocommerce-Price-amount amount">
-                                                                    <span class="woocommerce-Price-currencySymbol">$</span>64.99</span>
-                                                            </span>
-                                                        </li>
-                                                        <li class="woocommerce-mini-cart-item mini_cart_item">
-                                                            <a href="#" class="remove" aria-label="Remove this item" data-product_id="27" data-product_sku="">×</a>
-                                                            <a href="single-product-sidebar.html">
-                                                                <img src="assets/images/products/mini-cart2.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">Gear Virtual Reality 3D with Bluetooth Glasses&nbsp;
-                                                            </a>
-                                                            <span class="quantity">1 ×
-                                                                <span class="woocommerce-Price-amount amount">
-                                                                    <span class="woocommerce-Price-currencySymbol">$</span>72.00</span>
-                                                            </span>
-                                                        </li>
+
                                                     </ul>
                                                     <!-- .cart_list -->
                                                     <p class="woocommerce-mini-cart__total total">
-                                                        <strong>Subtotal:</strong>
+                                                        <strong>Tổng tiền:</strong>
                                                         <span class="woocommerce-Price-amount amount">
-                                                            <span class="woocommerce-Price-currencySymbol">$</span>136.99</span>
+                                                            <span class="woocommerce-Price-currencySymbol">
+                                                            </span><span id="total_price_bar"></span><sup>đ</sup>
+                                                        </span>
                                                     </p>
                                                     <p class="woocommerce-mini-cart__buttons buttons">
-                                                        <a href="cart.html" class="button wc-forward">Xem giỏ hàng</a>
-                                                        <a href="checkout.html" class="button checkout wc-forward">Đặt hàng</a>
+                                                        <a href="cart.html" class="button wc-forward">Tiến hành đặt hàng</a>
                                                     </p>
                                                 </div>
                                                 <!-- .widget_shopping_cart_content -->
@@ -190,7 +174,7 @@
                                 <!-- .site-search -->
                                 <a class="handheld-header-cart-link has-icon" href="cart.html" title="View your shopping cart">
                                     <i class="tm tm-shopping-bag"></i>
-                                    <span class="count">2</span>
+                                    <span id="amount_mobile" class="count">2</span>
                                 </a>
                             </div>
                             <!-- /.row -->
@@ -203,25 +187,32 @@
             </header>
             <script>
                 function checkCart() {
-                    if (getCookie("cart") === "" ) {
+                    var total = 0;
+                    if (localStorage.getItem("cart") === null ) {
                         document.getElementById("length_cart").innerHTML = 0;
+                        document.getElementById("amount_mobile").innerHTML = 0;
                     } else {
-                        const cart = JSON.parse(getCookie("cart"));
+                        const cart = JSON.parse(localStorage.getItem("cart"));
                         document.getElementById("length_cart").innerHTML = cart.length;
+                        document.getElementById("amount_mobile").innerHTML = cart.length;
                         var html_product = ""
                         for (var key in cart) {
                                 html_product += "<li class='woocommerce-mini-cart-item mini_cart_item'>"
-                                html_product += "<a href='#' class='remove' onclick = "" aria-label='Remove this item' data-product_id='65' data-product_sku=''>×</a>"
+                                html_product += "<a href='#' class='remove' name='" + cart[key].name + "' onclick='removeProduct(this.name)' aria-label='Remove this item' data-product_id='65' data-product_sku=''>×</a>";
                                 html_product += "<a href='single-product-sidebar.html'>"
                                 html_product += "<img id='' src='"+ cart[key].image +"' class='attachment-shop_thumbnail size-shop_thumbnail wp-post-image' alt=''>" + cart[key].name
-                                html_product += "</a>"
+                                html_product += "</a>";
                                 html_product += "<span class='quantity'>" + cart[key].amount.toString() + " ×"
                                 html_product += "<span class='woocommerce-Price-amount amount'>"
                                 html_product += "<span class='woocommerce-Price-currencySymbol'></span>" + cart[key].price + "</span>"
                                 html_product += "</span></li>"
+                                total = total + Number(cart[key].price_number)*Number(cart[key].amount);
                         }
                         document.getElementById("cart").innerHTML = html_product
+                        document.getElementById("total_price").innerHTML = total
+                        document.getElementById("total_price_bar").innerHTML = total
                     }
+
                  };
                 function getCookie(cname) {
                     var name = cname + "=";
@@ -237,6 +228,39 @@
                     }
                     return "";
                 }
+
+                function removeProduct(name) {
+                    const cart = JSON.parse(localStorage.getItem("cart"));
+                    for (var key in cart) {
+                        if (cart[key].name === name) {
+                            console.log("Xóa mẹ thằng ml này giùm")
+                            const new_cart = cart.filter(x => x.name !== name);
+                            localStorage.setItem("cart",JSON.stringify(new_cart));
+                            checkCart();
+                            notificationRemove();
+                        }
+                    }
+                }
+                function notificationRemove() {
+                    toastr.options = {
+                      "closeButton": false,
+                      "debug": false,
+                      "newestOnTop": false,
+                      "progressBar": true,
+                      "positionClass": "toast-top-right",
+                      "preventDuplicates": true,
+                      "showDuration": "300",
+                      "hideDuration": "1000",
+                      "timeOut": "2000",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                    }
+                   toastr.info('Sản phẩm đã được xóa khỏi giỏ hàng')
+                }
+
 
                  checkCart();
             </script>

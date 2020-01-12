@@ -136,24 +136,27 @@
     function getData() {
         var image = "{{ product.image.url }}";
         var price = "{{ product.price_string }}";
+        var price_number = "{{ product.price }}"
         var name = "{{ product.name }}";
         var amount = Number($("#quantity-input").attr('value'));
-        const data = {"image": image, "price": price, "name":name, "amount": amount};
+        const data = {"image": image, "price": price, "name":name, "amount": amount, "price_number": price_number};
         return data;
 
     }
     function addToCart() {
         const data = getData();
-        if (getCookie("cart") === "" ) {
+        if (localStorage.getItem("cart") === null ) {
             console.log("Không có cart");
             const cart = [];
             cart.push(data);
             console.log(cart.length);
-            document.cookie = "cart" + "=" + JSON.stringify(cart);
+            localStorage.setItem("cart",JSON.stringify(cart));
+            checkCart();
+            notificationSuccess();
         } else {
             count = 0;
             console.log("Tồn tại cart");
-            const cart = JSON.parse(getCookie("cart"));
+            const cart = JSON.parse(localStorage.getItem("cart"));
             for ( var key in cart) {
                 if (data.name == cart[key].name) {
                     cart[key].amount = cart[key].amount + data.amount;
@@ -163,10 +166,32 @@
             if (count == 0) {
                 cart.push(data);
             }
-            document.cookie = "cart" + "=" + JSON.stringify(cart);
+            localStorage.setItem("cart",JSON.stringify(cart));
             document.getElementById("length_cart").innerHTML = cart.length;
             console.log(cart);
+            checkCart();
+            notificationSuccess();
         }
+    }
+
+    function notificationSuccess() {
+        toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": true,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": true,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "2000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+       toastr.success('Sản phẩm đã được thêm vào giỏ hàng')
     }
 
     function setCookie(cname, cvalue, exdays) {
