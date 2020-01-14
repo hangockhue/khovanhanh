@@ -84,11 +84,13 @@
                                                         </table>
                                                         <!-- .shop_table shop_table_responsive -->
                                                         <div class="wc-proceed-to-checkout">
-                                                            <form class="woocommerce-shipping-calculator" method="post" action="#">
+                                                            <form class="woocommerce-shipping-calculator" method="POST" action="/cartboard">
+                                                                {% csrf_token %}
                                                                 <p>
                                                                     <a class="shipping-calculator-button">Thông tin khách hàng</a>
                                                                 </p>
                                                                 <div>
+
                                                                     <div class="shipping-calculator-form">
                                                                         <p id="name_" class="form-row form-row-wide validate-required">
                                                                             <input type="text" name="name" placeholder="Tên khách hàng" value="" class="input-text">
@@ -100,7 +102,7 @@
                                                                             <input type="text" name="address" placeholder="Địa chỉ" value="" class="input-text">
                                                                         </p>
                                                                         <p>
-                                                                            <button class="button" value="1" name="calc_shipping" type="submit">Đặt hàng</button>
+                                                                            <button class="button" name="calc_shipping" type="submit">Đặt hàng</button>
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -160,10 +162,13 @@
                      total = total + Number(cart[key].price_number)*Number(cart[key].amount);
 
                   }
+                  document.cookie = "cart" + "=" + JSON.stringify(cart);
              }
                document.getElementById("board-cart").innerHTML = html_product;
                document.getElementById("total_price_board").innerHTML = total;
                document.getElementById("last_total").innerHTML = total;
+
+
         };
         function updateCartBoard() {
             console.log("Tiến hành cập nhật giỏ hàng");

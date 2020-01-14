@@ -66,26 +66,28 @@ class Nofication(models.Model):
         verbose_name = "Nofication"
         verbose_name_plural = "Email khách hàng"
 
-class Order(models.Model):
-    id = models.IntegerField(primary_key=True)
-    delivery = models.CharField("Tên đơn hàng", max_length=50, null=True)
+class Delivery(models.Model):
+
+    delivery = models.CharField("Tên đơn hàng", max_length=50)
     name = models.CharField("Tên khách hàng", max_length=50)
     number_phone = models.CharField("Số điện thoại", max_length=15)
-    price = models.IntegerField("Giá đơn hàng", null=True)
+    price = models.CharField("Giá đơn hàng", null=True, max_length=20)
     order_list = models.TextField("Danh sách đặt hàng")
-    description = models.TextField("Ghi chú")
+    address = models.TextField("Địa chỉ")
     check_order = models.BooleanField(default=False)
-    person_check = models.CharField("Người check", max_length=20, unique=False)
+    person_check = models.CharField("Người check", max_length=20,null=True, blank=True)
 
     def __str__(self):
         return self.delivery
 
     class Meta:
-        verbose_name = 'Order'
+        verbose_name = 'Delivery'
         verbose_name_plural = 'Đơn hàng'
 
+
 class Done_Delivery(models.Model):
-    name = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+    name = models.ForeignKey(Delivery, on_delete=models.CASCADE, null=True)
     # order_list = models.TextField("Danh sách đơn hàng", default=Order.objects.filter(delivery=name).order_list)
     date_done = models.DateField("Ngày giao", null=True)
     # price = models.CharField("Giá đơn hàng", default=Order.objects.filter(delivery=name).price)

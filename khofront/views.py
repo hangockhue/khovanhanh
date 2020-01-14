@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from vanhanh.models import Typeproduct, Product, Nofication, Grouptype
+from vanhanh.models import Typeproduct, Product, Nofication, Grouptype, Delivery
 # Create your views here.
 from django.http import Http404
 from django.template.defaultfilters import register
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 import random
-
+import json
 
 def index(request):
 
@@ -32,8 +33,40 @@ def type_product(request, pk, page):
     return render(request, "content/type_product.html",{"products":products,"type":type ,"titles":titles})
 
 def cartboard(request):
+    # Filter header
+    titles = {}
+    group_type = Grouptype.objects.filter(highlight=True)
+    for _title in group_type:
+        titles[_title.name] = Typeproduct.objects.filter(group_type=_title)
+    # End filter
 
-    return render(request, "content/cartboard.html")
+    if request.method == "POST":
+        total = len(Delivery.objects.all())
+        if total == 0:
+            delivery = "Đơn hàng 1"
+        else:
+            delivery = "Đơn hàng " + str(Delivery.objects.all()[total-1].pk + 1)
+        name = request.POST['name']
+        phone_number = request.POST['phone_number']
+        address = request.POST['address']
+        cart = json.loads(request.COOKIES["cart"])
+        price = 0
+        order_list = ""
+        for i in cart:
+            price += int(i['price_number'])*int(i['amount'])
+            order = i['name'] + ":" + i['amount'] + "/n"
+            order_list += order
+        print(name, phone_number, address, delivery, price, order_list)
+        Delivery.objects.create(name=name, number_phone=phone_number,address= address,
+                             price=str(price), delivery=delivery, order_list=order_list)
+        # send_mail("Bạn đã nhận được một đơn đặt hàng",
+        #           "Người đặt: {}, số điện thoại: {}, đơn hàng: {}".format(name,phone_number,order_list),
+        #           "nhokproxmenone@gmail.com",
+        #           ["healwayhappy@gmail.com"]
+        #           )
+        return redirect("success")
+    else:
+        return render(request, "content/cartboard.html", {"titles": titles})
 
 
 def success_post(request):

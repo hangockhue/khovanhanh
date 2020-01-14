@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Order, Done_Delivery, Typeproduct, Nofication, Grouptype
+from .models import Product, Delivery, Done_Delivery, Typeproduct, Nofication, Grouptype
 
 # Register your models here.
 
@@ -27,6 +27,6 @@ class NoficationView(admin.ModelAdmin):
 admin.site.register(Grouptype, GrouptypeView)
 admin.site.register(Nofication,NoficationView)
 admin.site.register(Product, ProductView)
-admin.site.register(Order)
+admin.site.register(Delivery)
 admin.site.register(Done_Delivery)
 admin.site.register(Typeproduct, TypeproductView)
