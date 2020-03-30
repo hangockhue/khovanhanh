@@ -1,0 +1,50 @@
+<section class="section-tabs-with-product-carousel section-products-carousel-tabs">
+                                    {% for product in product_list_2 %}
+                                        {% for key,value in product.items %}
+                                    <div class="section-products-carousel-tabs-wrap">
+                                        <header class="section-header">
+                                            <ul role="tablist" class="nav justify-content-end">
+                                                <li class="nav-item"><a class="nav-link active" data-toggle="tab">{{ key.name }}</a></li>
+                                            </ul>
+                                        </header>
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" role="tabpanel">
+                                                <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products" data-slick="{&quot;slidesToShow&quot;:8,&quot;slidesToScroll&quot;:8,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:650,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:6,&quot;slidesToScroll&quot;:6}}]}">
+                                                    <div class="container-fluid">
+                                                        <div class="woocommerce columns-8">
+                                                            <div class="products">
+                                                                {% for v in value %}
+                                                                <div class="product">
+                                                                    <a href="/detail/{{ v.url }}-{{ v.pk }}.html" class="woocommerce-LoopProduct-link">
+                                                                        <img src="{{v.image.url}}" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> {{v.price_string}} <sup>đ</sup></span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">{{v.name}}</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Chi tiết</a>
+                                                                    </div>
+                                                                </div>
+                                                                {% endfor %}
+                                                                <!-- /.product-outer -->
+                                                            </div>
+                                                        </div>
+                                                        <!-- .woocommerce -->
+                                                    </div>
+                                                    <!-- .container-fluid -->
+                                                </div>
+                                                <!-- .products-carousel -->
+                                            </div>
+                                            <!-- .tab-pane -->
+                                        </div>
+                                        <!-- .tab-content -->
+                                    </div>
+                                    <!-- .section-products-carousel-tabs-wrap -->
+                                    {% endfor %}
+                                    {% endfor %}
+                                </section>

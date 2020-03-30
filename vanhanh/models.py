@@ -16,7 +16,8 @@ class Grouptype(models.Model):
 
 class Typeproduct(models.Model):
     name = models.CharField("Loại sản phẩm", max_length=50)
-    highlight = models.BooleanField("Nổi bật tại trang chủ",default=False)
+    highlight = models.BooleanField("Sản phẩm bán chạy",default=False)
+    list_show = models.BooleanField("Hiển thị ở trang chủ", default=False)
     group_type = models.ForeignKey(Grouptype, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):

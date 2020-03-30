@@ -10,15 +10,31 @@ import json
 
 def index(request):
 
+    # Filter hightlight product
     type_product = Typeproduct.objects.filter(highlight=True)
     products = {}
-    titles = {}
     for type in type_product:
         products[remove_accents(type.name).replace(" ","")] = Product.objects.filter(type=type)
+
+
+    # Filter title
+    titles = {}
     group_type = Grouptype.objects.filter(highlight=True)
     for _title in group_type:
         titles[_title.name] = Typeproduct.objects.filter(group_type=_title)
-    return render(request, "content/index.html", {"type_product": type_product, "products": products, "titles":titles})
+
+    # Filter list show
+    product_list = {}
+    product_list_2 = []
+    show_products = Typeproduct.objects.filter(list_show=True)
+    for _title in show_products:
+        product_list[_title.name] = Product.objects.filter(type=_title)
+        product_list_2.append({_title: Product.objects.filter(type=_title)})
+    print(product_list)
+    print(product_list_2)
+
+    return render(request, "content/index.html", {"type_product": type_product, "products": products,
+                                                  "titles":titles, "product_list_2":product_list_2})
 
 
 def type_product(request, pk, page):
