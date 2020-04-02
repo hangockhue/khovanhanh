@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from vanhanh.models import Typeproduct, Product, Nofication, Grouptype, Delivery
+from vanhanh.models import Typeproduct, Product, Nofication, Grouptype, Delivery, Classification
 # Create your views here.
 from django.http import Http404
 from django.template.defaultfilters import register
@@ -7,6 +7,14 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 import random
 import json
+
+
+def filter_titles():
+    titles = []
+    classifications = Classification.objects.all()
+    for classification in classifications:
+        titles.append({classification: Grouptype.objects.filter(classification=classification)})
+    return titles
 
 def index(request):
 
@@ -16,12 +24,8 @@ def index(request):
     for type in type_product:
         products[remove_accents(type.name).replace(" ","")] = Product.objects.filter(type=type)
 
-
     # Filter title
-    titles = {}
-    group_type = Grouptype.objects.filter(highlight=True)
-    for _title in group_type:
-        titles[_title.name] = Typeproduct.objects.filter(group_type=_title)
+    titles = filter_titles()
 
     # Filter list show
     product_list = {}
@@ -30,30 +34,35 @@ def index(request):
     for _title in show_products:
         product_list[_title.name] = Product.objects.filter(type=_title)
         product_list_2.append({_title: Product.objects.filter(type=_title)})
-    print(product_list)
-    print(product_list_2)
 
     return render(request, "content/index.html", {"type_product": type_product, "products": products,
-                                                  "titles":titles, "product_list_2":product_list_2})
+                                                   "titles":titles,"product_list_2":product_list_2})
+def group(request, pk, page):
+    # Filter titles
+    titles = filter_titles()
+    # End filter
+    group_type = Grouptype.objects.get(pk=pk)
 
+    types = Typeproduct.objects.filter(group_type=group_type)
+    products = Product.objects.filter(type__in=types)
+    print(products)
+
+    return render(request, 'content/group_product.html', {'titles': titles, 'types':types, 'group_type':group_type 
+                                                            ,'products':products})
 
 def type_product(request, pk, page):
     type = Typeproduct.objects.get(pk=pk)
     products = Product.objects.filter(type=type)
+    group_type = type.group_type
+    types = Typeproduct.objects.filter(group_type=group_type)
     # Filter header
-    titles = {}
-    group_type = Grouptype.objects.filter(highlight=True)
-    for _title in group_type:
-        titles[_title.name] = Typeproduct.objects.filter(group_type=_title)
-    print([products])
-    return render(request, "content/type_product.html",{"products":products,"type":type ,"titles":titles})
+    titles = filter_titles()
+    return render(request, "content/type_product.html",{"products":products,"type":type 
+                                                        ,"titles":titles, 'types':types, 'group_type':group_type})
 
 def cartboard(request):
     # Filter header
-    titles = {}
-    group_type = Grouptype.objects.filter(highlight=True)
-    for _title in group_type:
-        titles[_title.name] = Typeproduct.objects.filter(group_type=_title)
+    titles = filter_titles()
     # End filter
 
     if request.method == "POST":
@@ -97,11 +106,9 @@ def search(request):
         return render(request, "content/search.html", { "products": products, "key_search": request.GET["search"] })
 
 def detail(request, pk, page):
-
-    titles = {}
-    group_type = Grouptype.objects.filter(highlight=True)
-    for _title in group_type:
-        titles[_title.name] = Typeproduct.objects.filter(group_type=_title)
+    # Filter titles
+    titles = filter_titles()
+    # End filter
 
     product = Product.objects.get(pk=pk)
     related = Product.objects.all()
@@ -127,6 +134,8 @@ def remove_accents(input_str):
         else:
             s += c
     return s
+
+
 
 @register.filter
 def get_item(dictionary, key):

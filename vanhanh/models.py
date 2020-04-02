@@ -2,9 +2,18 @@ from django.db import models
 from datetime import datetime
 # Create your models here.
 
+class Classification(models.Model):
+    name = models.CharField("Phân loại", max_length=50)
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = "Classification"
+        verbose_name_plural = "Phân loại"
+
 class Grouptype(models.Model):
     name = models.CharField("Loại chung", max_length=50)
     highlight = models.BooleanField("Hiển thị title", default=True)
+    classification = models.ForeignKey(Classification, on_delete=models.CASCADE, blank=True, null=True)
     def __str__(self):
         return remove_accents(self.name)
     @property
@@ -32,13 +41,14 @@ class Typeproduct(models.Model):
 class Product(models.Model):
     name = models.CharField("Tên", max_length=50)
     image = models.ImageField("Image", null=True, default='4.jpg')
-    description = models.TextField("Mô tả", null=True, blank=True)
+    description = models.TextField("Thông tin sản phẩm", null=True, blank=True)
     price = models.IntegerField("Giá", default=150000)
     sale_off = models.IntegerField("Giá giảm", null=True, blank=True)
-    wholesale = models.CharField("Giá bán sĩ", null=True, max_length=50, default="150k/cái")
+    wholesale = models.CharField("Giá bán sĩ", null=True, max_length=50,blank=True ,default="150k/cái")
     type = models.ForeignKey(Typeproduct, on_delete=models.CASCADE)
     brands = models.CharField("Thương hiệu", max_length=50, null=True, blank=True)
-
+    out_stock = models.BooleanField("Hết hàng", default=False, null=True, blank=True)
+    describe = models.TextField("Mô tả", null=True, blank=True)
     def save(self, *args, **kwargs):
         try:
             this = Product.objects.get(id=self.id)
@@ -95,6 +105,7 @@ class Done_Delivery(models.Model):
     class Meta:
         verbose_name = 'Done_Delivery'
         verbose_name_plural = 'Đơn hàng đã hoàn thành'
+
 s1 = u'ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠạẢảẤấẦầẨẩẪẫẬậẮắẰằẲẳẴẵẶặẸẹẺẻẼẽẾếỀềỂểỄễỆệỈỉỊịỌọỎỏỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỤụỦủỨứỪừỬửỮữỰựỲỳỴỵỶỷỸỹ'
 s0 = u'AAAAEEEIIOOOOUUYaaaaeeeiioooouuyAaDdIiUuOoUuAaAaAaAaAaAaAaAaAaAaAaAaEeEeEeEeEeEeEeEeIiIiOoOoOoOoOoOoOoOoOoOoOoOoUuUuUuUuUuUuUuYyYyYyYy'
 def remove_accents(input_str):
@@ -105,6 +116,4 @@ def remove_accents(input_str):
         else:
             s += c
     return s
-# class Sale_Product(models.Model):
-#     name = models.CharField("Tên")
-#
+
