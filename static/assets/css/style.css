@@ -3312,7 +3312,7 @@ button,
 input,
 textarea {
   color: #43454b;
-  font-family: "Rubik", "Source Sans Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   line-height: 1.618;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -11149,7 +11149,11 @@ a#variations_clear:before {
 @media (min-width: 1200px) and (max-width: 1399px) {
   .slider-with-banners .slider,
   .slider-with-banners .slider-block {
+<<<<<<< HEAD
     flex: 0 0 75%; } }
+=======
+    /*flex: 0 0 75%;*/ } }
+>>>>>>> 8b7148f90ac676acf78cc3dfc9961c75d0f51be1
 
 @media (min-width: 1400px) and (max-width: 1589px) {
   .slider-with-banners .slider,
