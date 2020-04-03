@@ -27,7 +27,7 @@
                                                                             <ins>
                                                                                 <span class="amount"> </span>
                                                                             </ins>
-                                                                            <span class="amount"> {{ i.price_string }}  <sup>đ</sup> </span>
+                                                                            <span class="amount"> {{ i.price_string }} <sup>đ</sup> </span>
                                                                         </span>
                                                                         <!-- /.price -->
                                                                         <h2 class="woocommerce-loop-product__title">{{ i.name }}</h2>
@@ -52,7 +52,7 @@
                                                             <div class="products">
                                                                 {% for i in products|get_item:type.name %}
                                                                 <div class="product">
-                                                                    <a href="/detail/abc-{{ i.pk }}.html" class="woocommerce-LoopProduct-link">
+                                                                    <a href="/detail/{{i.url}}-{{ i.pk }}.html" class="woocommerce-LoopProduct-link">
                                                                         <img src="{{ i.image.url }}" width="224" height="197" class="wp-post-image" alt="">
                                                                         <span class="price">
                                                                             <ins>
