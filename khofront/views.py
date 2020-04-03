@@ -99,11 +99,14 @@ def success_post(request):
     return render(request, "content/success.html")
 
 def search(request):
+    titles = filter_titles()
+
     if request.method == "GET":
         key_search = remove_accents(request.GET['search']).lower()
         products = [product for product in Product.objects.all() if key_search in product.name_remove_accents.lower()]
         print(products)
-        return render(request, "content/search.html", { "products": products, "key_search": request.GET["search"] })
+        return render(request, "content/search.html", { "products": products, "titles":titles ,
+                                                         "key_search": request.GET["search"] })
 
 def detail(request, pk, page):
     # Filter titles

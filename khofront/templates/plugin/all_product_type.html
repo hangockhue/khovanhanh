@@ -11,10 +11,14 @@
                                                                     <a href="/detail/{{ i.url }}-{{ i.pk }}.html" class="woocommerce-LoopProduct-link">
                                                                         <img src="{{i.image.url}}" width="224" height="197" class="wp-post-image" alt="">
                                                                         <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount"> </span>
-                                                                            </ins>
                                                                             <span class="amount"> {{ i.price_string }}  <sup>đ</sup> </span>
+                                                                            <br>
+                                                                            {% if i.sale_off  %}
+                                                                            <del>
+                                                                                <span class="woocommerce-Price-amount amount">
+                                                                                    <span class="woocommerce-Price-currencySymbol"></span>{{ i.sale_off_string }} <sup>đ</sup></span>
+                                                                            </del>
+                                                                            {% endif %}
                                                                         </span>
                                                                         <!-- /.price -->
                                                                         <h2 class="woocommerce-loop-product__title">{{ i.name }}</h2>
