@@ -33,7 +33,7 @@ class Typeproduct(models.Model):
         return self.name
     @property
     def url(self):
-        return remove_accents(self.name).replace(" ","-")
+        return remove_accents(self.name).replace(" ","-").replace("/", "")
     class Meta:
         verbose_name = 'Typeproduct'
         verbose_name_plural = 'Loại sản phẩm'
@@ -58,7 +58,7 @@ class Product(models.Model):
         super(Product, self).save(*args, **kwargs)
     @property
     def url(self):
-        return remove_accents(self.name).replace(" ","-")
+        return remove_accents(self.name).replace(" ","-").replace("/", "")
     @property
     def sale_off_string(self):
         return str(self.sale_off)[:-3] + "." + str(self.price)[-3:]
