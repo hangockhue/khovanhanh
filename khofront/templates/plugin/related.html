@@ -13,16 +13,20 @@
                 <a href="/detail/{{ product.url }}-{{ product.pk }}.html" class="woocommerce-LoopProduct-link">
                     <img src="{{ product.image.url }}" width="224" height="197" class="wp-post-image" alt="">
                     <span class="price">
-                                                            <ins>
-                                                                <span class="amount"></span>
-                                                            </ins>
-                                                            <span class="amount"> {{ product.price_string }} <sup>đ</sup></span>
-                                                        </span>
+                        <span class="amount"> {{ product.price_string }} <sup>đ</sup></span>
+                        <br>
+                        {% if product.sale_off  %}
+                        <del>
+                            <span class="woocommerce-Price-amount amount">
+                                <span class="woocommerce-Price-currencySymbol"></span>{{ product.sale_off_string }} <sup>đ</sup></span>
+                        </del>
+                        {% endif %}
+                    </span>
                     <!-- /.price -->
                     <h2 class="woocommerce-loop-product__title">{{ product.name }}</h2>
                 </a>
                 <div class="hover-area">
-                    <a class="button add_to_cart_button" href="cart.html" rel="nofollow">Thêm vào giỏ hàng</a>
+                    <a class="button add_to_cart_button" href="{% url 'detail' page=product.url pk=product.pk %}" rel="nofollow">Chi tiết sản phẩm</a>
                 </div>
             </div>
             {% endfor %}

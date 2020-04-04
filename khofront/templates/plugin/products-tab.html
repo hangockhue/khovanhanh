@@ -1,7 +1,7 @@
 <section class="section-products-tabs">
                                     <div class="section-products-tabs-wrap">
                                         <header class="section-header">
-                                            <h2 class="section-title">Sản phẩm nổi bật</h2>
+                                            <h2 class="section-title">Danh mục bán chạy</h2>
                                             <ul role="tablist" class="nav justify-content-center">
                                                 {% for type in type_product|get_first %}
                                                         <li class="nav-item"><a class="nav-link active" href="#tab-{{type.pk}}" data-toggle="tab">{{ type.name }}</a></li>
@@ -24,10 +24,14 @@
                                                                     <a href="/detail/{{ i.url }}-{{ i.pk }}.html" class="woocommerce-LoopProduct-link">
                                                                         <img src="{{i.image.url}}" width="224" height="197" class="wp-post-image" alt="">
                                                                         <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount"> </span>
-                                                                            </ins>
                                                                             <span class="amount"> {{ i.price_string }} <sup>đ</sup> </span>
+                                                                            <br>
+                                                                            {% if i.sale_off  %}
+                                                                            <del>
+                                                                                <span class="woocommerce-Price-amount amount">
+                                                                                    <span class="woocommerce-Price-currencySymbol"></span>{{ i.sale_off_string }} <sup>đ</sup></span>
+                                                                            </del>
+                                                                            {% endif %}
                                                                         </span>
                                                                         <!-- /.price -->
                                                                         <h2 class="woocommerce-loop-product__title">{{ i.name }}</h2>

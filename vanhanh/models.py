@@ -43,7 +43,7 @@ class Product(models.Model):
     image = models.ImageField("Image", null=True, default='4.jpg')
     description = models.TextField("Thông tin sản phẩm", null=True, blank=True)
     price = models.IntegerField("Giá", default=150000)
-    sale_off = models.IntegerField("Giá giảm", null=True, blank=True)
+    sale_off = models.IntegerField("Giá gốc", null=True, blank=True)
     wholesale = models.CharField("Giá bán sĩ", null=True, max_length=50,blank=True ,default="150k/cái")
     type = models.ForeignKey(Typeproduct, on_delete=models.CASCADE)
     brands = models.CharField("Thương hiệu", max_length=50, null=True, blank=True)
@@ -59,6 +59,9 @@ class Product(models.Model):
     @property
     def url(self):
         return remove_accents(self.name).replace(" ","-")
+    @property
+    def sale_off_string(self):
+        return str(self.sale_off)[:-3] + "." + str(self.price)[-3:]
     @property
     def price_string(self):
         return str(self.price)[:-3] + "." + str(self.price)[-3:]

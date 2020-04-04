@@ -15,7 +15,7 @@
                             <a href="home-v1.html">Trang chủ</a>
                             <span class="delimiter">
                                 <i class="tm tm-breadcrumbs-arrow-right"></i>
-                            </span><a href="/{{product.type.url}}-{{product.type.pk}}">{{ product.type }}</a>
+                            </span><a href="{% url 'type_product' page=product.type.url pk=product.type.pk %}">{{ product.type }}</a>
                             <span class="delimiter">
                                 <i class="tm tm-breadcrumbs-arrow-right"></i>
                             </span>{{ product.name }}
