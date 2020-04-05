@@ -79,7 +79,8 @@ def cartboard(request):
         order_list = ""
         for i in cart:
             price += int(i['price_number'])*int(i['amount'])
-            order = i['name'] + ":" + i['amount'] + "/n"
+            order = (str(i['name']) + ":" + str(i['amount']) + ":" 
+                        + str(int(i['price_number'])*int(i['amount'])) + "\n")
             order_list += order
         print(name, phone_number, address, delivery, price, order_list)
         Delivery.objects.create(name=name, number_phone=phone_number,address= address,

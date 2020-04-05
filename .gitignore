@@ -10,3 +10,4 @@ github
 venv
 .ebextensions/*
 .idea/workspace.xml
+db.sqlite3
