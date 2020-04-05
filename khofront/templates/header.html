@@ -152,9 +152,10 @@
                                             <li class="highlight menu-item animate-dropdown">
                                                 <a title="New Arrivals" href="#">New Arrivals</a>
                                             </li>
-                                            {% for title, small_titles in titles.items %}
+                                            {% for title in titles %}
+                                            {% for key, values in title.items %}
                                             <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                                                <a title="Computers &amp; Laptops" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">{{ title }} <span class="caret"></span></a>
+                                                <a title="Computers &amp; Laptops" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">{{ key.name }} <span class="caret"></span></a>
                                                 <ul role="menu" class=" dropdown-menu">
                                                     <li class="menu-item menu-item-object-static_block animate-dropdown">
                                                         <div class="yamm-content">
@@ -164,9 +165,8 @@
                                                                     <div class="kc-col-container">
                                                                         <div class="kc_text_block">
                                                                             <ul>
-                                                                                <li class="nav-title">Computers &amp; Accessories</li>
-                                                                                {% for s in small_titles %}
-                                                                                <li><a href="/{{s.url}}-{{s.pk}}">{{ s.name }}</a></li>
+                                                                                {% for value in values %}
+                                                                                <li><a href="{% url 'group' page=value.name_filter pk=value.pk %}">{{ value.name }}</a></li>
                                                                                 {% endfor %}
                                                                                 <li class="nav-divider"></li>
                                                                             </ul>
@@ -184,6 +184,7 @@
                                                     </li>
                                                 </ul>
                                             </li>
+                                            {% endfor %}
                                             {% endfor %}
                                         </ul>
                                     </div>

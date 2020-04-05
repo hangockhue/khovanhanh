@@ -23814,7 +23814,7 @@ dl.variation {
     flex: 0 0 33.3333333333%;
     max-width: 33.3333333333%; }
   .columns-4 .products:not(.slick-slider) .product {
-    flex: 0 0 16%;
+    flex: 0 0 20%;
     max-width: 25%; }
   .columns-5 .products:not(.slick-slider) .product {
     flex: 0 0 20%;
