@@ -119,7 +119,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-ALLOWED_HOSTS = [u'nhokproxmen.pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [u'nhokproxmen.pythonanywhere.com', 'localhost', '127.0.0.1', 'khovanhanh.pythonanywhere.com']
 # Setting path templates
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 TEMPLATE_DIRS = (
