@@ -57,20 +57,18 @@
     
         function setParam(paramName, paramValue){
             if (paramValue != null){
-                // Lưu các tham số vào cookie
+                // Save cookie
                 document.cookie = `${paramName}=` + encodeURIComponent(paramValue) + "; path=/";
             }
         }
-        // Lấy giá trị của các tham số từ URL
+        // Get params from URL
         var token = getParameterByName('token');
         var click_id = getParameterByName('click_id');
         var commission = getParameterByName('commission');
         var lead_amount = getParameterByName('lead_amount');
         var pub_id = getParameterByName('pub_id');
-
-        // Thay 'param1', 'param2' bằng tên thực tế của các tham số bạn muốn lấy
     
-        // Lưu các tham số vào cookie
+        // Save params to cookie
         setParam('token',token);
         setParam('click_id', click_id);
         setParam('commission', commission);
