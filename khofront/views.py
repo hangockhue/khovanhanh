@@ -113,7 +113,7 @@ def update_waff(request):
         if lead_amount:
             data["amount2"] = float(lead_amount)
         print(data)
-        response = requests.put(url=update_url, data=data, headers=headers)
+        response = requests.put(url=update_url, data=json.dumps(data), headers=headers, verify=False)
         print("Status update track link:", response.status_code)
         print("Body response update track link: ", response.text)
     else:
