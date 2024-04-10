@@ -43,4 +43,39 @@
     <script type="text/javascript" src="{% static "assets/js/slick.min.js" %}"></script>
     <script type="text/javascript" src="{% static "assets/js/scripts.js" %}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
+    <script>
+        // Hàm để lấy giá trị của một tham số từ URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    
+        function setParam(paramName, paramValue){
+            if (paramValue != null){
+                // Lưu các tham số vào cookie
+                document.cookie = `${paramName}=` + encodeURIComponent(paramValue) + "; path=/";
+            }
+        }
+        // Lấy giá trị của các tham số từ URL
+        var token = getParameterByName('token');
+        var click_id = getParameterByName('click_id');
+        var commission = getParameterByName('commission');
+        var lead_amount = getParameterByName('lead_amount');
+        var pub_id = getParameterByName('pub_id');
+
+        // Thay 'param1', 'param2' bằng tên thực tế của các tham số bạn muốn lấy
+    
+        // Lưu các tham số vào cookie
+        setParam('token',token);
+        setParam('click_id', click_id);
+        setParam('commission', commission);
+        setParam('lead_amount', lead_amount);
+        setParam('pub_id', pub_id);
+
+    </script>
 </html>

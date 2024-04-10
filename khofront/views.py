@@ -7,7 +7,8 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 import random
 import json
-
+from khofront.config import WAFF_TOKEN
+import requests
 
 def filter_titles():
     titles = []
@@ -17,7 +18,6 @@ def filter_titles():
     return titles
 
 def index(request):
-
     # Filter hightlight product
     type_product = Typeproduct.objects.filter(highlight=True)
     products = {}
@@ -90,10 +90,31 @@ def cartboard(request):
         #           "nhokproxmenone@gmail.com",
         #           ["healwayhappy@gmail.com"]
         #           )
+        update_waff(request)
         return redirect("success")
     else:
         return render(request, "content/cartboard.html", {"titles": titles})
 
+def update_waff(request):
+    click_id = request.COOKIES.get('click_id')
+    commission = request.COOKIES.get('commission')
+    lead_amount = request.COOKIES.get('lead_amount')
+    pub_id = request.COOKIES.get('pub_id')
+    if click_id:
+        update_url = f"https://wwaff.com/affiliate/tracklinks/{click_id}"
+        headers ={
+            "Authorization": WAFF_TOKEN
+        }
+        data = {
+            "flead": 1,
+            "amount": float(commission),
+            "amount2": float(lead_amount)
+        }
+        response = requests.put(url=update_url, data=data, headers=headers)
+        print("Status update track link:", response.status_code)
+        print("Body response update track link: ", response.text)
+    else:
+        print("Click ID doesn't exsit. Update later!")
 
 def success_post(request):
 
