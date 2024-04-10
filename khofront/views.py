@@ -90,16 +90,18 @@ def cartboard(request):
         #           "nhokproxmenone@gmail.com",
         #           ["healwayhappy@gmail.com"]
         #           )
-        update_waff(request)
+        update_waff(request, price)
         return redirect("success")
     else:
         return render(request, "content/cartboard.html", {"titles": titles})
 
-def update_waff(request):
+def update_waff(request, price):
     click_id = request.COOKIES.get('click_id')
-    commission = request.COOKIES.get('commission')
+    # commission = request.COOKIES.get('commission')
     lead_amount = request.COOKIES.get('lead_amount')
     pub_id = request.COOKIES.get('pub_id')
+    commission = round(price / 24000, 2) #Convert VND to USD
+    print("Commission: ", commission)
     if click_id:
         update_url = f"https://wwaff.com/affiliate/tracklinks/{click_id}"
         headers ={
