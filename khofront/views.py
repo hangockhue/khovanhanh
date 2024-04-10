@@ -106,10 +106,13 @@ def update_waff(request):
             "Authorization": WAFF_TOKEN
         }
         data = {
-            "flead": 1,
-            "amount": float(commission),
-            "amount2": float(lead_amount)
+            "flead": 1
         }
+        if commission:
+            data["amount"] = float(commission)
+        if lead_amount:
+            data["amount2"] = float(lead_amount)
+        print(data)
         response = requests.put(url=update_url, data=data, headers=headers)
         print("Status update track link:", response.status_code)
         print("Body response update track link: ", response.text)
