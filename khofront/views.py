@@ -111,9 +111,9 @@ def update_waff(request, price):
             "flead": 1
         }
         if commission:
-            data["amount"] = float(commission)
+            data["amount2"] = float(commission)
         if lead_amount:
-            data["amount2"] = float(lead_amount)
+            data["amount"] = float(lead_amount)
         print(data)
         response = requests.put(url=update_url, data=json.dumps(data), headers=headers, verify=False)
         print("Status update track link:", response.status_code)
